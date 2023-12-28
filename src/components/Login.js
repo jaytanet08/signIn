@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import liff from '@line/liff'
 import { Link, useNavigate } from 'react-router-dom'
 import { Form, Alert, Button } from 'react-bootstrap'
 import { useUserAuth } from '../context/UserAuthContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faFacebook, faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGoogle, faFacebook, faTwitter, faGithub, faLine } from '@fortawesome/free-brands-svg-icons';
 function Login() {
   const [email, setEamil] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +15,17 @@ function Login() {
     signInWithTwitter,
     signInWithGitHub } = useUserAuth();
   let navigate = useNavigate();
+
+  useEffect(() => {
+    liff.init({ liffId: '2002510217-LNRGRdme' })
+  }, [])
+  const logInByLine = () => {
+    try {
+      liff.login();
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const handleSubmit = async () => {
     setError("");
     try {
@@ -102,6 +114,12 @@ function Login() {
               <Button variant="dark" type="button" className="faGithub-login-button" onClick={logInByGitHub}>
                 <FontAwesomeIcon icon={faGithub} className="faGithub-icon" style={{ marginRight: "10px" }} />
                 Login with Github
+              </Button>
+            </div>
+            <div className='d-grid gap-2' style={{ marginTop: "10px" }}>
+              <Button variant="success" type="button" className="faLine-login-button" onClick={logInByLine}>
+                <FontAwesomeIcon icon={faLine} className="faLine-icon" style={{ marginRight: "10px" }} />
+                Login with Line
               </Button>
             </div>
           </Form>

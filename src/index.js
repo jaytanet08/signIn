@@ -13,7 +13,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ResetPassword from './components/ResetPassword';
 import Home from './components/Home';
-import ProtechtedRouter from './auth/ProtechtedRouter';
+// import ProtechtedRouter from './auth/ProtechtedRouter';
 
 
 const router = createBrowserRouter([{
@@ -32,9 +32,13 @@ const router = createBrowserRouter([{
   path: "/resetpassword",
   element: <ResetPassword />
 },
+// {
+//   path: "/home",
+//   element: <ProtechtedRouter><Home /></ProtechtedRouter>
+// }
 {
   path: "/home",
-  element: <ProtechtedRouter><Home /></ProtechtedRouter>
+  element: <Home />
 }
 
 
